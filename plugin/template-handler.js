@@ -5,7 +5,7 @@ function compile(compileStep){
  var content = compileStep.read().toString('utf-8');
 
  var moduleName = compileStep.inputPath.replace(/\.au\.html$/, '').replace(/\\/g, '/');
- var path = moduleName + 'tmpl.js';
+ var path = moduleName + '.tmpl.js';
 
  var output = buildTemplate(content, moduleName);
 
