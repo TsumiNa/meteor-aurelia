@@ -17,6 +17,7 @@ Package.onUse(function(api) {
   api.addFiles('aurelia-meteor.js');
 });
 
+
 Package.registerBuildPlugin({
   name : 'babel',
   sources : [
@@ -26,6 +27,14 @@ Package.registerBuildPlugin({
     'babel-core': '5.8.24'
   }
 });
+
+Package.registerBuildPlugin({
+  name : 'template',
+  sources : [
+    'plugin/template-handler.js'
+  ]
+});
+
 Package.onTest(function(api) {
   api.use('tinytest');
   api.use('ahmedshuhel:aurelia-meteor');
