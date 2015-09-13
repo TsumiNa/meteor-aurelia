@@ -1,6 +1,36 @@
+Plugin.registerSourceHandler('au.html', compile);
 
-exports.translate = function(load) {
-  return 'module.exports = "' + load.source
+function compile(compileStep){
+
+ var content = compileStep.read().toString('utf-8');
+
+ var moduleName = compileStep.inputPath.replace(/\.au\.html$/, '').replace(/\\/g, '/');
+ var path = moduleName + 'tmpl.js';
+
+ var output = buildTemplate(content, moduleName);
+
+ compileStep.addJavaScript({
+    path: path,
+    data: output,
+    sourcePath: compileStep.inputPath
+  });
+}
+
+function buildTemplate(src, moduleName){
+
+return 'System.registerDynamic("'+ moduleName +'.html!github:systemjs/plugin-text@0.0.2", [], true, function(require, exports, module) {'+
+'         ; ' +
+'         var global = this, ' +
+'            __define = global.define; ' +
+'         global.define = undefined; ' +
+'         module.exports = "' + clean(src) + 
+'         global.define = __define;' +
+'         return module.exports;' +
+'       });'
+}
+
+function clean(src) {
+  return src 
     .replace(/(["\\])/g, '\\$1')
     .replace(/[\f]/g, "\\f")
     .replace(/[\b]/g, "\\b")
