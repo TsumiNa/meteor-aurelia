@@ -1,10 +1,10 @@
-Plugin.registerSourceHandler('au.html', compile);
+Plugin.registerSourceHandler('tmpl.html', compile);
 
 function compile(compileStep){
 
  var content = compileStep.read().toString('utf-8');
 
- var moduleName = compileStep.inputPath.replace(/\.au\.html$/, '').replace(/\\/g, '/');
+ var moduleName = compileStep.inputPath.replace(/\.tmpl\.html$/, '').replace(/\\/g, '/');
  var path = moduleName + '.tmpl.js';
 
  var output = buildTemplate(content, moduleName);

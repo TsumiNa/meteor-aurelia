@@ -11,7 +11,8 @@ Package.onUse(function(api) {
 
   api.addFiles([
     'lib/system.js',
-    "lib/aurelia.js"
+    "lib/aurelia.js",
+    "lib/config.js"
     ], ["client"]);
 
   api.addFiles('aurelia-meteor.js');
@@ -19,13 +20,12 @@ Package.onUse(function(api) {
 
 
 Package.registerBuildPlugin({
-  name : 'babel',
+  name : 'viewmodel',
   sources : [
-    'plugin/handler.js'
+    'plugin/viewmodel-handler.js'
   ],
   npmDependencies: {
-    'babel-core': '5.8.24',
-    'babel-runtime': '5.8.24',
+    'babel-core': '5.8.24'
   }
 });
 

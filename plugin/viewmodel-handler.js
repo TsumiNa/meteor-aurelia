@@ -1,6 +1,6 @@
 var babel = Npm.require('babel-core');
 
-Plugin.registerSourceHandler('babel.js', compile);
+Plugin.registerSourceHandler('vm.js', compile);
 
 
 function compile(compileStep){
@@ -12,7 +12,7 @@ function compile(compileStep){
    "es7.decorators"
  ]}).code;
 
- var moduleName = compileStep.inputPath.replace(/\.babel\.js$/, '').replace(/\\/g, '/');
+ var moduleName = compileStep.inputPath.replace(/\.vm\.js$/, '').replace(/\\/g, '/');
  var path = moduleName + '.js';
 
  var output = result.replace("System.register([", 'System.register("' + moduleName + '",[');
