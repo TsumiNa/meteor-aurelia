@@ -32,7 +32,7 @@ To bootstrap Aurelia, in the index.html (the root of an Meteor app), include:
 
 The aurelia-app="client/main" attribute points to the Aurelia configuration file named main, which is main.vm.js.
 
-In the client folder create and insert:
+In the client folder create main.vm.js and insert:
 
 ```
 export function configure(aurelia) {
