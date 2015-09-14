@@ -24,7 +24,8 @@ Package.registerBuildPlugin({
     'plugin/handler.js'
   ],
   npmDependencies: {
-    'babel-core': '5.8.24'
+    'babel-core': '5.8.24',
+    'babel-runtime': '5.8.24',
   }
 });
 

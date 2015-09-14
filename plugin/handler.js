@@ -9,8 +9,7 @@ function compile(compileStep){
  var result = babel.transform(content, {
    modules: "system", optional : [
    "es7.classProperties",
-   "es7.decorators",
-   "runtime"
+   "es7.decorators"
  ]}).code;
 
  var moduleName = compileStep.inputPath.replace(/\.babel\.js$/, '').replace(/\\/g, '/');
