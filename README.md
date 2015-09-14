@@ -1,8 +1,6 @@
 # Aurelia Meteor
-================
 
 [Aurelia](http://aurelia.io) and [Meteor](www.meteor.com) power combined.
-
 
 ## Quick start
 
