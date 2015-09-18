@@ -10,6 +10,7 @@ Package.onUse(function(api) {
   api.versionsFrom('1.1.0.3');
 
   api.addFiles([
+    'lib/system-polyfills.js',
     'lib/system.js',
     "lib/aurelia.js",
     "lib/config.js"
