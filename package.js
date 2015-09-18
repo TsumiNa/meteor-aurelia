@@ -1,5 +1,5 @@
 Package.describe({
-  name: 'ahmedshuhel:aurelia-meteor',
+  name: 'ahmedshuhel:aurelia',
   version: '0.1.0',
   summary: 'Combines the power of Aurelia with magical Meteor',
   git: 'http://github.com/ahmedshuhel/aurelia-meteor',
