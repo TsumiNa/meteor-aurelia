@@ -1,6 +1,6 @@
 Package.describe({
   name: 'ahmedshuhel:aurelia',
-  version: '0.1.0',
+  version: '0.2.0',
   summary: 'Combines the power of Aurelia with magical Meteor',
   git: 'http://github.com/ahmedshuhel/aurelia-meteor',
   documentation: 'README.md'
@@ -39,7 +39,7 @@ Package.registerBuildPlugin({
 
 Package.onTest(function(api) {
   api.use('tinytest');
-  api.use('ahmedshuhel:aurelia-meteor');
+  api.use('ahmedshuhel:aurelia');
   api.addFiles('aurelia-meteor-tests.js');
 });
 
