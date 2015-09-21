@@ -7,6 +7,7 @@
 ## Quick start
 
 ### Meteor Project
+
 1. Install [Meteor](http://docs.meteor.com/#quickstart) `$ curl https://install.meteor.com | /bin/sh`
 2. Create a new meteor app using `$ meteor create myapp` or navigate to the root of your existing app
 3. Install Aurelia `$ meteor add ahmedshuhel:aurelia`
@@ -14,6 +15,7 @@
 
 ## Resources
 - [Example application](https://github.com/ahmedshuhel/aurelia-skeleton-meteor) : A `aurelia-meteor` port of [skeleton-navigation](http://github.com/aurelia/skeleton-navigation)
+- [Simple Todo Application](https://github.com/Markusxmr/Aurelia-Meteor-Simple-Todo) : A port of official meteor todo application.
 
 ## Tutorial
 
@@ -30,9 +32,9 @@ To bootstrap Aurelia, in the index.html (the root of an Meteor app), include:
 </body>
 ```
 
-The aurelia-app="client/main" attribute points to the Aurelia configuration file named main, which is main.vm.js.
+The aurelia-app="client/main" attribute points to the Aurelia configuration file named main, which is main.es.js.
 
-In the client folder create main.vm.js and insert:
+In the client folder create main.es.js and insert:
 
 
 ```javascript
@@ -46,9 +48,9 @@ export function configure(aurelia) {
 
 ```
 
-The main.vm.js is the file where the configuration is done to bootstrap Aurelia.
+The `main.es.js` is the file where the configuration is done to bootstrap Aurelia.
 
-In this case the main file tells where the entry point of the app is located ('client/app'), which means go look for the `app.tmpl.html`, `app.vm.js` pair.
+In this case the main file tells where the entry point of the app is located ('client/app'), which means go look for the `app.tmpl.html`, `app.es.js` pair.
 
 By convention Aurelia uses view/view-model pairs of the same name.
 
@@ -62,7 +64,7 @@ In the client folder, create app.tmpl.html and insert:
 
 ```
 
-Then create app.vm.js and insert:
+Then create app.es.js and insert:
 
 ```javascript
 export class App {
@@ -71,3 +73,9 @@ export class App {
   }
 }
 ```
+
+## Extensions
+
+- Use `.es.js` for every javascript file that Aurelia will handle.
+- Use `.tmpl.html` for every Aurelia Templates.
+- Typescript can be used too. Just `.ts` will work for typescript files.
