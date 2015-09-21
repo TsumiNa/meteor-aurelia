@@ -19,7 +19,7 @@
 
 To bootstrap Aurelia, in the index.html (the root of an Meteor app), include:
 
-```
+```html
 <body>
   <div aurelia-app="client/main"></div>
 
@@ -34,7 +34,8 @@ The aurelia-app="client/main" attribute points to the Aurelia configuration file
 
 In the client folder create main.vm.js and insert:
 
-```
+
+```javascript
 export function configure(aurelia) {
   aurelia.use
     .standardConfiguration()
@@ -42,17 +43,18 @@ export function configure(aurelia) {
 
   aurelia.start().then(a => a.setRoot('client/app'));
 }
+
 ```
 
 The main.vm.js is the file where the configuration is done to bootstrap Aurelia.
 
-In this case the main file tells where the entry point of the app is located ('client/app'), which means go look for the app.tmpl.html, app.vm.js pair.
+In this case the main file tells where the entry point of the app is located ('client/app'), which means go look for the `app.tmpl.html`, `app.vm.js` pair.
 
 By convention Aurelia uses view/view-model pairs of the same name.
 
 In the client folder, create app.tmpl.html and insert:
 
-```
+```html
 <template>
   <input type="text" placeholder="Your name" value.bind="name">
   <h2>Hello ${name}!</h2>
@@ -62,7 +64,7 @@ In the client folder, create app.tmpl.html and insert:
 
 Then create app.vm.js and insert:
 
-```
+```javascript
 export class App {
   constructor(){
     this.name = "";
