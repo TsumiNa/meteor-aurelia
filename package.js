@@ -1,6 +1,6 @@
 Package.describe({
   name: 'ahmedshuhel:aurelia',
-  version: '0.2.0',
+  version: '0.3.0',
   summary: 'Combines the power of Aurelia with magical Meteor',
   git: 'http://github.com/ahmedshuhel/aurelia-meteor',
   documentation: 'README.md'
@@ -19,11 +19,21 @@ Package.onUse(function(api) {
   api.addFiles('aurelia-meteor.js');
 });
 
+Package.registerBuildPlugin({
+  name: 'typescript',
+  sources : [
+    'plugin/typescript-handler.js'
+  ],
+  npmDependencies : {
+    'typescript' : '1.6.2' 
+  }
+});
+
 
 Package.registerBuildPlugin({
-  name : 'viewmodel',
+  name : 'es',
   sources : [
-    'plugin/viewmodel-handler.js'
+    'plugin/es-handler.js'
   ],
   npmDependencies: {
     'babel-core': '5.8.24'
@@ -42,4 +52,3 @@ Package.onTest(function(api) {
   api.use('ahmedshuhel:aurelia');
   api.addFiles('aurelia-meteor-tests.js');
 });
-
