@@ -47,6 +47,16 @@ Package.registerBuildPlugin({
   ]
 });
 
+Package.registerBuildPlugin({
+  name : 'tmpl_jade',
+  sources : [
+    'plugin/tmpl-jade-handler.js'
+  ],
+  npmDependencies : {
+    'jade' : '1.11.0' 
+  }
+});
+
 Package.onTest(function(api) {
   api.use('tinytest');
   api.use('ahmedshuhel:aurelia');
