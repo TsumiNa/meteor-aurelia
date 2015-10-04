@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/TsumiNa/aurelia-meteor.svg)](https://travis-ci.org/TsumiNa/aurelia-meteor)
+
 # Aurelia Meteor
 
 [Aurelia](http://aurelia.io) and [Meteor](http://www.meteor.com) power combined.Use typescript and Jade to speed up your works.
