@@ -2,5 +2,5 @@ language: node_js
 node_js:
 - "4.1.0"
 before_install:
-- "curl -L http://git.io/ejPSng | /bin/sh"
 - "npm install cross-spawn"
+- "curl -L http://git.io/ejPSng | /bin/sh"
