@@ -1,6 +1,6 @@
 var babel = Npm.require('babel-core');
 
-Plugin.registerSourceHandler('es.js', compile);
+Plugin.registerSourceHandler('au.js', compile);
 
 
 function compile(compileStep) {
@@ -14,7 +14,7 @@ function compile(compileStep) {
     ]
   }).code;
 
-  var moduleName = compileStep.inputPath.replace(/\.es\.js$/, '').replace(/\\/g, '/');
+  var moduleName = compileStep.inputPath.replace(/\.au\.js$/, '').replace(/\\/g, '/');
   var path = moduleName + '.js';
 
   var output = result.replace("System.register([", 'System.register("' + moduleName + '",[');

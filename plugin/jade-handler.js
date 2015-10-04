@@ -1,25 +1,38 @@
-Plugin.registerSourceHandler('tmpl.html', compile);
+var jade = Npm.require('jade');
+
+Plugin.registerSourceHandler('au.jade', compile);
 
 function compile(compileStep){
 
- var content = compileStep.read().toString('utf-8');
+  var src = compileStep.read().toString('utf-8');
+  var content = renderJade(src, compileStep);
 
- var moduleName = compileStep.inputPath.replace(/\.tmpl\.html$/, '').replace(/\\/g, '/');
- var path = moduleName + '.tmpl.js';
+  var moduleName = compileStep.inputPath.replace(/\.au\.jade$/, '').replace(/\\/g, '/');
+  var path = moduleName + '.tmpl.js';
 
- var output = buildTemplate(content, moduleName);
+  var output = buildTemplate(content, moduleName);
 
- compileStep.addJavaScript({
+  compileStep.addJavaScript({
     path: path,
     data: output,
     sourcePath: compileStep.inputPath
   });
 }
 
+function renderJade(src, compileStep){
+  try {
+    return jade.render(src);
+  } catch (err) {
+    return compileStep.error({
+      message: "Jade syntax error: " + err.message,
+      sourcePath: compileStep.inputPath
+    });
+  }
+}
+
 function buildTemplate(src, moduleName){
 
 return 'System.registerDynamic("'+ moduleName +'.html!github:systemjs/plugin-text@0.0.2", [], true, function(require, exports, module) {'+
-'         ; ' +
 '         var global = this, ' +
 '            __define = global.define; ' +
 '         global.define = undefined; ' +

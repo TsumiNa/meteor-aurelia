@@ -1,8 +1,8 @@
 # Aurelia Meteor
 
-[![Join the chat at https://gitter.im/ahmedshuhel/aurelia-meteor](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/ahmedshuhel/aurelia-meteor?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[Aurelia](http://aurelia.io) and [Meteor](http://www.meteor.com) power combined.Use typescript and Jade to speed up your works.
 
-[Aurelia](http://aurelia.io) and [Meteor](http://www.meteor.com) power combined.
+This package forked from [aurelia-meteor](https://github.com/ahmedshuhel/aurelia-meteor). I add Jade support and html-minify.
 
 ## Quick start
 
@@ -10,12 +10,11 @@
 
 1. Install [Meteor](http://docs.meteor.com/#quickstart) `$ curl https://install.meteor.com | /bin/sh`
 2. Create a new meteor app using `$ meteor create myapp` or navigate to the root of your existing app
-3. Install Aurelia `$ meteor add ahmedshuhel:aurelia`
+3. Install Aurelia `$ meteor add kidddddd1984:aurelia-ts-jade`
 
 
 ## Resources
-- [Example application](https://github.com/ahmedshuhel/aurelia-skeleton-meteor) : A `aurelia-meteor` port of [skeleton-navigation](http://github.com/aurelia/skeleton-navigation)
-- [Simple Todo Application](https://github.com/Markusxmr/Aurelia-Meteor-Simple-Todo) : A port of official meteor todo application.
+- [Example application](https://github.com/tsumina/aurelia-skeleton-ts-jade) : A `aurelia-meteor` port of [skeleton-navigation](http://github.com/aurelia/skeleton-navigation)
 
 ## Tutorial
 
@@ -32,9 +31,9 @@ To bootstrap Aurelia, in the index.html (the root of an Meteor app), include:
 </body>
 ```
 
-The aurelia-app="client/main" attribute points to the Aurelia configuration file named main, which is main.es.js.
+The aurelia-app="client/main" attribute points to the Aurelia configuration file named main, which is `main.au.js` or `main.au.ts`.
 
-In the client folder create main.es.js and insert:
+Assume you use es6 js. In the client folder create main.au.js and insert:
 
 
 ```javascript
@@ -48,13 +47,13 @@ export function configure(aurelia) {
 
 ```
 
-The `main.es.js` is the file where the configuration is done to bootstrap Aurelia.
+The `main.au.js` is the file where the configuration is done to bootstrap Aurelia.
 
-In this case the main file tells where the entry point of the app is located ('client/app'), which means go look for the `app.tmpl.html`, `app.es.js` pair.
+In this case the main file tells where the entry point of the app is located ('client/app'), which means go look for the `app.au.html`, `app.au.js` pair.
 
 By convention Aurelia uses view/view-model pairs of the same name.
 
-In the client folder, create app.tmpl.html and insert:
+In the client folder, create app.au.html and insert:
 
 ```html
 <template>
@@ -64,7 +63,7 @@ In the client folder, create app.tmpl.html and insert:
 
 ```
 
-Then create app.es.js and insert:
+Then create app.au.js and insert:
 
 ```javascript
 export class App {
@@ -74,8 +73,9 @@ export class App {
 }
 ```
 
-## Extensions
+## Conventions
 
-- Use `.es.js` for every javascript file that Aurelia will handle.
-- Use `.tmpl.html` for every Aurelia Templates.
-- Typescript can be used too. Just `.ts` will work for typescript files.
+- Use `.au.js` or `.au.ts` for every javascript file that Aurelia will handle.
+- Use `.au.html` or `.au.jade` for every Aurelia Templates.
+
+You can mix these things as your wish.

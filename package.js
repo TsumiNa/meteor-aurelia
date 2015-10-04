@@ -1,8 +1,8 @@
 Package.describe({
-  name: 'ahmedshuhel:aurelia',
-  version: '0.3.0',
-  summary: 'Combines the power of Aurelia with magical Meteor',
-  git: 'http://github.com/ahmedshuhel/aurelia-meteor',
+  name: 'kidddddd1984:aurelia-ts-jade',
+  version: '0.4.0',
+  summary: 'Combines the power of Aurelia with magical Meteor. Use typescript and jade to speed up your works',
+  git: 'http://github.com/tsumina/aurelia-meteor',
   documentation: 'README.md'
 });
 
@@ -12,17 +12,17 @@ Package.onUse(function(api) {
   api.addFiles([
     'lib/system-polyfills.js',
     'lib/system.js',
-    "lib/aurelia.js",
-    "lib/config.js"
+    "lib/config.js",
+    "lib/aurelia.js"
     ], ["client"]);
 
-  api.addFiles('aurelia-meteor.js');
+  api.addFiles('aurelia-ts-jade.js');
 });
 
 Package.registerBuildPlugin({
   name: 'typescript',
   sources : [
-    'plugin/typescript-handler.js'
+    'plugin/ts-handler.js'
   ],
   npmDependencies : {
     'typescript' : '1.6.2' 
@@ -41,24 +41,26 @@ Package.registerBuildPlugin({
 });
 
 Package.registerBuildPlugin({
-  name : 'template',
+  name : 'au_html',
   sources : [
-    'plugin/template-handler.js'
-  ]
-});
-
-Package.registerBuildPlugin({
-  name : 'tmpl_jade',
-  sources : [
-    'plugin/tmpl-jade-handler.js'
+    'plugin/html-handler.js'
   ],
   npmDependencies : {
-    'jade' : '1.11.0' 
+    'html-minifier': '0.8.0'
+  }});
+
+Package.registerBuildPlugin({
+  name : 'au_jade',
+  sources : [
+    'plugin/jade-handler.js'
+  ],
+  npmDependencies : {
+    'jade' : '1.11.0'
   }
 });
 
 Package.onTest(function(api) {
   api.use('tinytest');
-  api.use('ahmedshuhel:aurelia');
-  api.addFiles('aurelia-meteor-tests.js');
+  api.use('kidddddd1984:aurelia-ts-jade');
+  api.addFiles('aurelia-ts-jade-tests.js');
 });
