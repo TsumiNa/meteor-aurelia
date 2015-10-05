@@ -50,6 +50,7 @@ Package.registerBuildPlugin({
 
 Package.onTest(function(api) {
   api.use('tinytest');
-  api.use('kidddddd1984:aurelia-ts-jade');
-  api.addFiles('aurelia-ts-jade-tests.js');
+  api.use('ecmascript');
+  api.use('tsumina:meteor-aurelia');
+  api.addFiles('meteor-aurelia-tests.js');
 });
