@@ -10,22 +10,24 @@ Plugin.registerCompiler({
 function CompilerES() {}
 CompilerES.prototype.processFilesForTarget = function (files) {
 
-  var result = babel.transform(file.getContentsAsString(), {
-    modules: "system",
-    optional: [
-      "es7.classProperties",
-      "es7.decorators"
-    ]
-  }).code;
+  files.forEach(function (file) {
+    var result = babel.transform(file.getContentsAsString(), {
+      modules: "system",
+      optional: [
+        "es7.classProperties",
+        "es7.decorators"
+      ]
+    }).code;
 
-  var moduleName = file.getPathInPackage().replace(/\.au\.js$/, '').replace(/\\/g, '/');
-  var path = moduleName + '.js';
+    var moduleName = file.getPathInPackage().replace(/\.au\.js$/, '').replace(/\\/g, '/');
+    var path = moduleName + '.js';
 
-  var output = result.replace("System.register([", 'System.register("' + moduleName + '",[');
+    var output = result.replace("System.register([", 'System.register("' + moduleName + '",[');
 
-  file.addJavaScript({
-    path: path,
-    data: output,
-    sourcePath: file.getPathInPackage()
+    file.addJavaScript({
+      path: path,
+      data: output,
+      sourcePath: file.getPathInPackage()
+    });
   });
 }
