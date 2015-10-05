@@ -6,13 +6,15 @@
 
 This package forked from [aurelia-meteor](https://github.com/ahmedshuhel/aurelia-meteor). I add Jade support and html-minify.
 
+**This package adds [meteor-typescript](https://github.com/TsumiNa/meteor-typescript) to your project.**
+
 ## Quick start
 
 ### Meteor Project
 
 1. Install [Meteor](http://docs.meteor.com/#quickstart) `$ curl https://install.meteor.com | /bin/sh`
 2. Create a new meteor app using `$ meteor create myapp` or navigate to the root of your existing app
-3. Install Aurelia `$ meteor add kidddddd1984:aurelia-ts-jade`
+3. Install Aurelia `$ meteor add tsumina:meteor-aurelia`
 
 
 ## Resources
@@ -81,3 +83,9 @@ export class App {
 - Use `.au.html` or `.jade` for every Aurelia Templates.
 
 You can mix these things as your wish.
+
+
+### Copyright and license
+
+Code and documentation &copy; 2015 [TsumiNa](https://github.com/TsumiNa)
+Released under the MIT license. 
