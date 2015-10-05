@@ -9,7 +9,7 @@ Package.describe({
 Package.onUse(function(api) {
   api.versionsFrom('1.2.0.2');
   api.use('isobuild:compiler-plugin@1.0.0');
-  api.use('tsumina:meteor-typescript');
+  api.use('tsumina:meteor-typescript@0.0.1');
   api.addFiles([
     "lib/config.js",
     "lib/aurelia.js"
