@@ -77,7 +77,7 @@ export class App {
 
 ## Conventions
 
-- Use `.au.js` or `.au.ts` for every javascript file that Aurelia will handle.
-- Use `.au.html` or `.au.jade` for every Aurelia Templates.
+- Use `.au.js` or `.ts` for every javascript file that Aurelia will handle.
+- Use `.au.html` or `.jade` for every Aurelia Templates.
 
 You can mix these things as your wish.
