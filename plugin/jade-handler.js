@@ -1,31 +1,41 @@
 var jade = Npm.require('jade');
 
-Plugin.registerSourceHandler('au.jade', compile);
+Plugin.registerCompiler({
+  extensions: ['jade'],
+  filenames: []
+}, function () {
+  return new CompilerJADE();
+});
 
-function compile(compileStep){
+function CompilerJADE() {}
+CompilerJADE.prototype.processFilesForTarget = function (files){
 
-  var src = compileStep.read().toString('utf-8');
-  var content = renderJade(src, compileStep);
+  files.forEach(function (file) {
+    // make module name
+    var moduleName = file.getPathInPackage().replace(/\\/g,'/').replace('.jade','');
 
-  var moduleName = compileStep.inputPath.replace(/\.au\.jade$/, '').replace(/\\/g, '/');
-  var path = moduleName + '.tmpl.js';
+    var content = renderJade(file);
 
-  var output = buildTemplate(content, moduleName);
+    var path = moduleName + '.tpl.js';
 
-  compileStep.addJavaScript({
-    path: path,
-    data: output,
-    sourcePath: compileStep.inputPath
+    var output = buildTemplate(content, moduleName);
+
+    file.addJavaScript({
+      path: path,
+      data: output,
+      sourcePath: file.getPathInPackage()
+    });
+
   });
 }
 
-function renderJade(src, compileStep){
+function renderJade(file){
   try {
-    return jade.render(src);
+    return jade.render(file.getContentsAsString());
   } catch (err) {
-    return compileStep.error({
+    return file.error({
       message: "Jade syntax error: " + err.message,
-      sourcePath: compileStep.inputPath
+      sourcePath: file.getPathInPackage()
     });
   }
 }

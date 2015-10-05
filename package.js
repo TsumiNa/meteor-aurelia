@@ -7,26 +7,15 @@ Package.describe({
 });
 
 Package.onUse(function(api) {
-  api.versionsFrom('1.1.0.3');
-
+  api.versionsFrom('1.2.0.2');
+  api.use('isobuild:compiler-plugin@1.0.0');
+  api.use('tsumina:meteor-typescript');
   api.addFiles([
-    'lib/system-polyfills.js',
-    'lib/system.js',
     "lib/config.js",
     "lib/aurelia.js"
     ], ["client"]);
 
   api.addFiles('aurelia-ts-jade.js');
-});
-
-Package.registerBuildPlugin({
-  name: 'typescript',
-  sources : [
-    'plugin/ts-handler.js'
-  ],
-  npmDependencies : {
-    'typescript' : '1.6.2' 
-  }
 });
 
 

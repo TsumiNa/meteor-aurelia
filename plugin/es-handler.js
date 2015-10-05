@@ -1,12 +1,16 @@
 var babel = Npm.require('babel-core');
 
-Plugin.registerSourceHandler('au.js', compile);
+Plugin.registerCompiler({
+  extensions: ['au.js'],
+  filenames: []
+}, function () {
+  return new CompilerES();
+});
 
+function CompilerES() {}
+CompilerES.prototype.processFilesForTarget = function (files) {
 
-function compile(compileStep) {
-
-  var content = compileStep.read().toString('utf-8');
-  var result = babel.transform(content, {
+  var result = babel.transform(file.getContentsAsString(), {
     modules: "system",
     optional: [
       "es7.classProperties",
@@ -14,14 +18,14 @@ function compile(compileStep) {
     ]
   }).code;
 
-  var moduleName = compileStep.inputPath.replace(/\.au\.js$/, '').replace(/\\/g, '/');
+  var moduleName = file.getPathInPackage().replace(/\.au\.js$/, '').replace(/\\/g, '/');
   var path = moduleName + '.js';
 
   var output = result.replace("System.register([", 'System.register("' + moduleName + '",[');
 
-  compileStep.addJavaScript({
+  file.addJavaScript({
     path: path,
     data: output,
-    sourcePath: compileStep.inputPath
+    sourcePath: file.getPathInPackage()
   });
 }
