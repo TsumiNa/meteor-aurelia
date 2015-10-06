@@ -2,6 +2,8 @@
 
 # Aurelia Meteor
 
+[![Join the chat at https://gitter.im/TsumiNa/meteor-aurelia](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/TsumiNa/meteor-aurelia?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 [Aurelia](http://aurelia.io) and [Meteor](http://www.meteor.com) power combined.Use typescript and Jade to speed up your works.
 
 This package forked from [aurelia-meteor](https://github.com/ahmedshuhel/aurelia-meteor). I add Jade support and html-minify.
