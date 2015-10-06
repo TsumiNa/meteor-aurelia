@@ -6,7 +6,7 @@
 
 This package forked from [aurelia-meteor](https://github.com/ahmedshuhel/aurelia-meteor). I add Jade support and html-minify.
 
-**This package adds [meteor-typescript](https://github.com/TsumiNa/meteor-typescript) to your project.**
+**This package dependent on `SystemJS Module loader`. It's already combind [meteor-typescript](https://github.com/TsumiNa/meteor-typescript) as dependence. But if you want a typescript support in your apps, you need install [meteor-typescript](https://github.com/TsumiNa/meteor-typescript) package.**
 
 ## Quick start
 
@@ -14,20 +14,24 @@ This package forked from [aurelia-meteor](https://github.com/ahmedshuhel/aurelia
 
 1. Install [Meteor](http://docs.meteor.com/#quickstart) `$ curl https://install.meteor.com | /bin/sh`
 2. Create a new meteor app using `$ meteor create myapp` or navigate to the root of your existing app
-3. Install Aurelia `$ meteor add tsumina:meteor-aurelia`
+3. Install Aurelia and  meteor-typescript:
+```bash
+$ meteor add tsumina:meteor-aurelia`
+$ meteor add tsumina:meteor-typescript`  # if you need typescript support
+```
 
 
 ## Resources
-- [Example application](https://github.com/tsumina/aurelia-skeleton-ts-jade) : A `aurelia-meteor` port of [skeleton-navigation](http://github.com/aurelia/skeleton-navigation)
+- [Example application](https://github.com/tsumina/aurelia-skeleton-ts-jade) : A **meteor-aurelia** port of [skeleton-navigation](http://github.com/aurelia/skeleton-navigation)
 
 ## Tutorial
 
-To bootstrap Aurelia, in the index.html (the root of an Meteor app), include:
+Aurelia use conventions to keep code simple and clean, to bootstrap a aurelia app you need a `index.html` (the root of an Meteor app), include:
 
 ```html
 <body>
   <div aurelia-app="client/main"></div>
-
+  
   <script>
     System.import('aurelia-bootstrapper');
   </script>
@@ -35,9 +39,9 @@ To bootstrap Aurelia, in the index.html (the root of an Meteor app), include:
 </body>
 ```
 
-The aurelia-app="client/main" attribute points to the Aurelia configuration file named main, which is `main.au.js` or `main.au.ts`.
-
-Assume you use es6 js. In the client folder create main.au.js and insert:
+The aurelia-app="client/main" attribute points to the Aurelia configuration file named main, which is `main.au.js` or `main.ts`.
+  
+Assume you use es6 js and html template. In the client folder create main.au.js and insert:
 
 
 ```javascript
@@ -74,6 +78,30 @@ export class App {
   constructor(){
     this.name = "";
   }
+}
+```
+
+Infact, if you add [meteor-typescript](https://github.com/TsumiNa/meteor-typescript) to your app, now you can use `SystemJS Module loader` on both client/server. Simple write like this(the root of an Meteor app):
+
+- `index.html`
+```html
+<body>
+  <div aurelia-app="client/main"></div>
+</body>
+```
+  
+- `entry.js`
+```javascript
+if (Meteor.isClient) {
+  Meteor.startup(function(){
+    System.import('aurelia-bootstrapper');
+  })
+}
+
+if (Meteor.isServer) {
+  Meteor.startup(function(){
+    // some codes
+  })
 }
 ```
 
