@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/TsumiNa/aurelia-meteor.svg)](https://travis-ci.org/TsumiNa/aurelia-meteor)
+[![Build Status](https://travis-ci.org/TsumiNa/meteor-aurelia.svg)](https://travis-ci.org/TsumiNa/meteor-aurelia)
 
 # Aurelia Meteor
 
