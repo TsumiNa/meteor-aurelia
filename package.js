@@ -1,6 +1,6 @@
 Package.describe({
   name: 'tsumina:meteor-aurelia',
-  version: '0.4.6',
+  version: '0.4.8',
   summary: 'Combines the power of Aurelia with magical Meteor. Use typescript and jade to speed up your works',
   git: 'http://github.com/tsumina/meteor-aurelia',
   documentation: 'README.md'

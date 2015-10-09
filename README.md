@@ -13,8 +13,8 @@
 2. Create a new meteor app using `$ meteor create myapp` or navigate to the root of your existing app
 3. Install Aurelia and  meteor-typescript:
 ```bash
-$ meteor add tsumina:meteor-aurelia`
-$ meteor add tsumina:meteor-typescript`  # if you need typescript support
+$ meteor add tsumina:meteor-aurelia
+$ meteor add tsumina:meteor-typescript  # if you need typescript support
 ```
 
 
@@ -78,7 +78,7 @@ export class App {
 }
 ```
 
-Infact, if you add [meteor-typescript](https://github.com/TsumiNa/meteor-typescript) to your app, now you can use `SystemJS Module loader` on both client/server. Simple write like this(the root of an Meteor app):
+Infact, you can use `SystemJS Module loader` on both client/server. Simple write code like this(the root of an Meteor app):
 
 - `index.html`
 ```html
@@ -101,6 +101,7 @@ if (Meteor.isServer) {
   })
 }
 ```
+![c/s](https://lh4.googleusercontent.com/-AuGDIhZ7UOA/VhfBSJpGHJI/AAAAAAAAc50/y63NWDadYac/w923-h921-no/%25E5%25B1%258F%25E5%25B9%2595%25E5%25BF%25AB%25E7%2585%25A7%2B2015-10-09%2B%25E4%25B8%258B%25E5%258D%258810.27.25.png)
 
 ## Conventions
 
