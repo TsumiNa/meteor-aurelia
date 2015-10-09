@@ -2,15 +2,12 @@
 
 [![Build Status](https://travis-ci.org/TsumiNa/meteor-aurelia.svg)](https://travis-ci.org/TsumiNa/meteor-aurelia)  [![Join the chat at https://gitter.im/TsumiNa/meteor-typescript](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/TsumiNa/meteor-typescript?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-[Aurelia](http://aurelia.io) and [Meteor](http://www.meteor.com) power combined.Use typescript and Jade to speed up your works.
+[Aurelia](http://aurelia.io) and [Meteor](http://www.meteor.com) power combined.Use typescript and Jade to speed up your works.This package forked from [aurelia-meteor](https://github.com/ahmedshuhel/aurelia-meteor). I add Jade support and html-minify.
 
-This package forked from [aurelia-meteor](https://github.com/ahmedshuhel/aurelia-meteor). I add Jade support and html-minify.
+**This package use `SystemJS Module loader`. By default it combind with [meteor-typescript](https://github.com/TsumiNa/meteor-typescript). But if you want write codes with typescript, you need add [meteor-typescript](https://github.com/TsumiNa/meteor-typescript) package to you meteor app project.**
 
-**This package dependent on `SystemJS Module loader`. It's already combind [meteor-typescript](https://github.com/TsumiNa/meteor-typescript) as dependence. But if you want a typescript support in your apps, you need install [meteor-typescript](https://github.com/TsumiNa/meteor-typescript) package.**
 
 ## Quick start
-
-### Meteor Project
 
 1. Install [Meteor](http://docs.meteor.com/#quickstart) `$ curl https://install.meteor.com | /bin/sh`
 2. Create a new meteor app using `$ meteor create myapp` or navigate to the root of your existing app
@@ -21,12 +18,12 @@ $ meteor add tsumina:meteor-typescript`  # if you need typescript support
 ```
 
 
-## Resources
+## Example
 - [Example application](https://github.com/tsumina/aurelia-skeleton-ts-jade) : A **meteor-aurelia** port of [skeleton-navigation](http://github.com/aurelia/skeleton-navigation)
 
 ## Tutorial
 
-Aurelia use conventions to keep code simple and clean, to bootstrap a aurelia app you need a `index.html` (the root of an Meteor app), include:
+Aurelia use conventions to keep code simple and clean, to bootstrap a aurelia app you need a `index.html` (in the root of an Meteor app), include:
 
 ```html
 <body>
@@ -39,7 +36,7 @@ Aurelia use conventions to keep code simple and clean, to bootstrap a aurelia ap
 </body>
 ```
 
-The aurelia-app="client/main" attribute points to the Aurelia configuration file named main, which is `main.au.js` or `main.ts`.
+The `aurelia-app="client/main"` attribute points to the Aurelia configuration file named main, which is `main.au.js`.
   
 Assume you use es6 js and html template. In the client folder create main.au.js and insert:
 
@@ -107,7 +104,7 @@ if (Meteor.isServer) {
 
 ## Conventions
 
-- Use `.au.js` or `.ts` for every javascript file that Aurelia will handle.
+- Use `.au.js` for every javascript file that Aurelia will handle. (with `meteor-typescript` can use `.ts`)
 - Use `.au.html` or `.jade` for every Aurelia Templates.
 
 You can mix these things as your wish.
