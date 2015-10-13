@@ -7,27 +7,36 @@ Plugin.registerCompiler({
   return new CompilerJADE();
 });
 
-class CompilerJADE{
+class CompilerJADE extends CachingCompiler {
+    constructor() {
+        super({
+            compilerName: 'CompilerHTML',
+            defaultCacheSize: 1024 * 1024 * 10,
+        });
+    }
 
+    getCacheKey(inputFile) {
+        return inputFile.getSourceHash();
+    }
 
-    processFilesForTarget(files) {
+    compileResultSize(compileResult) {
+        return compileResult.code.length;
+    }
 
-        files.forEach(file => {
-            // make module name
-            var moduleName = file.getPathInPackage().replace(/\\/g, '/').replace('.jade', '');
+    compileOneFile(inputFile) {
+        let moduleName = inputFile.getPathInPackage().replace(/\\/g, '/').replace('.jade', '');
+        let ret = {};
+        ret.code = this.buildTemplate(this.renderJade(inputFile), moduleName);
+        ret.path = moduleName + '.tpl.js';
+        return ret;
+    }
 
-            var content = this.renderJade(file);
-
-            var path = moduleName + '.tpl.js';
-
-            var output = this.buildTemplate(content, moduleName);
-
-            file.addJavaScript({
-                path: path,
-                data: output,
-                sourcePath: file.getPathInPackage()
-            });
-
+    addCompileResult(inputFile, compileResult) {
+        inputFile.addJavaScript({
+            path: compileResult.path,
+            sourcePath: inputFile.getPathInPackage(),
+            data: compileResult.code,
+            // sourceMap: compileResult.map
         });
     }
 

@@ -7,26 +7,38 @@ Plugin.registerCompiler({
   return new CompilerHTML();
 });
 
-class CompilerHTML{
-
-    processFilesForTarget(files) {
-
-        files.forEach(file => {
-            // make module name
-            var moduleName = file.getPathInPackage().replace(/\.au\.html$/, '').replace(/\\/g, '/');
-            var path = moduleName + '.tpl.js';
-
-            var output = this.buildTemplate(file.getContentsAsString(), moduleName);
-
-            file.addJavaScript({
-                path: path,
-                data: output,
-                sourcePath: file.getPathInPackage()
-            });
-
+class CompilerHTML extends CachingCompiler {
+    constructor() {
+        super({
+            compilerName: 'CompilerHTML',
+            defaultCacheSize: 1024 * 1024 * 10,
         });
     }
 
+    getCacheKey(inputFile) {
+        return inputFile.getSourceHash();
+    }
+
+    compileResultSize(compileResult) {
+        return compileResult.code.length;
+    }
+
+    compileOneFile(inputFile) {
+        let moduleName = inputFile.getPathInPackage().replace(/\.au\.html$/, '').replace(/\\/g, '/');
+        let ret = {};
+        ret.code = this.buildTemplate(inputFile.getContentsAsString(), moduleName);
+        ret.path = moduleName + '.tpl.js';
+        return ret;
+    }
+
+    addCompileResult(inputFile, compileResult) {
+        inputFile.addJavaScript({
+            path: compileResult.path,
+            sourcePath: inputFile.getPathInPackage(),
+            data: compileResult.code,
+            // sourceMap: compileResult.map
+        });
+    }
 
     buildTemplate(src, moduleName) {
 

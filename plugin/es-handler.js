@@ -3,33 +3,53 @@ var babel = Npm.require('babel-core');
 Plugin.registerCompiler({
     extensions: ['au.js'],
     filenames: []
-}, () =>{
+}, () => {
     return new CompilerES();
 });
 
-class CompilerES {
+class CompilerES extends CachingCompiler {
+    constructor() {
+        super({
+            compilerName: 'CompilerES',
+            defaultCacheSize: 1024 * 1024 * 10,
+        });
+        // starting message
+        msg[2](' Using Systemjs Loader...             ');
+        msg[2](' Using Aurelia Framework...           ');
+    }
 
-    processFilesForTarget(files) {
+    getCacheKey(inputFile) {
+        return inputFile.getSourceHash();
+    }
 
-        files.forEach(file => {
-            var result = babel.transform(file.getContentsAsString(), {
-                modules: "system",
-                optional: [
-                    "es7.classProperties",
-                    "es7.decorators"
-                ]
-            }).code;
+    compileResultSize(compileResult) {
+        return compileResult.code.length + compileResult.map.length;
+    }
 
-            var moduleName = file.getPathInPackage().replace(/\.au\.js$/, '').replace(/\\/g, '/');
-            var path = moduleName + '.js';
+    compileOneFile(inputFile) {
+        let result = babel.transform(inputFile.getContentsAsString(), {
+            modules: "system",
+            sourceMaps: true,
+            optional: [
+                "es7.classProperties",
+                "es7.decorators"
+            ]
+        });
 
-            var output = result.replace("System.register([", 'System.register("' + moduleName + '",[');
+        let moduleName = inputFile.getPathInPackage().replace(/\.au\.js$/, '').replace(/\\/g, '/');
+        let ret = {};
+        ret.code = result.code.replace("System.register([", 'System.register("' + moduleName + '",[');
+        ret.path = moduleName + '.js';
+        ret.map = result.map;
+        return ret;
+    }
 
-            file.addJavaScript({
-                path: path,
-                data: output,
-                sourcePath: file.getPathInPackage()
-            });
+    addCompileResult(inputFile, compileResult) {
+        inputFile.addJavaScript({
+            path: compileResult.path,
+            sourcePath: inputFile.getPathInPackage(),
+            data: compileResult.code,
+            sourceMap: compileResult.map
         });
     }
 }

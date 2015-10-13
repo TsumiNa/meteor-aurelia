@@ -2,10 +2,24 @@
 
 [![Build Status](https://travis-ci.org/TsumiNa/meteor-aurelia.svg)](https://travis-ci.org/TsumiNa/meteor-aurelia)  [![Join the chat at https://gitter.im/TsumiNa/meteor-typescript](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/TsumiNa/meteor-typescript?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-[Aurelia](http://aurelia.io) and [Meteor](http://www.meteor.com) power combined.Use typescript and Jade to speed up your works.This package forked from [aurelia-meteor](https://github.com/ahmedshuhel/aurelia-meteor). I add Jade support and html-minify.
+[Aurelia](http://aurelia.io) and [Meteor](http://www.meteor.com) power combined.Use Jade and html-minify to speed up your works.
 
-**This package use `SystemJS Module loader`. By default it combind with [meteor-typescript](https://github.com/TsumiNa/meteor-typescript). But if you want write codes with typescript, you need add [meteor-typescript](https://github.com/TsumiNa/meteor-typescript) package to you meteor app project.**
+**This package adds SystemJS Module Loader to your project.** It bundle with [meteor-systemjs](https://github.com/TsumiNa/meteor-systemjs) as default.
+If you want use typescript, you can add [meteor-typescript](https://github.com/TsumiNa/meteor-typescript) package to you meteor app project.
 
+- [Change Log](#change-log)
+- [Quick start](#quick-start)
+- [Example](#example)
+- [Tutorial](#tutorial)
+- [Conventions](#conventions)
+
+## change log
+
+#### 0.5.0
+- **[*breaking change*]** Typescript is unbundled. As a result, you will never see typescript messages. **There should no changes for use.**
+- Incremental build support
+- Parallel build support.
+- Update aurelia-bootstrapper to 0.18.0. See [details](https://github.com/aurelia/bootstrapper/releases/tag/0.18.0) for this change
 
 ## Quick start
 
@@ -19,7 +33,7 @@ $ meteor add tsumina:meteor-typescript  # if you need typescript support
 
 
 ## Example
-- [Example application](https://github.com/tsumina/aurelia-skeleton-ts-jade) : A **meteor-aurelia** port of [skeleton-navigation](http://github.com/aurelia/skeleton-navigation)
+- [Example application](https://github.com/tsumina/aurelia-skeleton-jade) : A **meteor-aurelia** port of [skeleton-navigation](http://github.com/aurelia/skeleton-navigation)
 
 ## Tutorial
 
