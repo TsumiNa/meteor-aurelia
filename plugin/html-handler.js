@@ -36,7 +36,7 @@ class CompilerHTML extends CachingCompiler {
             path: compileResult.path,
             sourcePath: inputFile.getPathInPackage(),
             data: compileResult.code,
-            // sourceMap: compileResult.map
+            bare: true
         });
     }
 

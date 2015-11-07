@@ -16,6 +16,10 @@ If you want use typescript, you can add [meteor-typescript](https://github.com/T
 ## change log
 
 #### 0.5.0
+- Update Aurelia components
+- Use bare mode. Now compiled file is not in its own closure
+
+#### 0.5.0
 - **[*breaking change*]** Typescript is unbundled. As a result, you will never see typescript messages. **There should no changes for use.**
 - Incremental build support
 - Parallel build support.
@@ -122,7 +126,7 @@ if (Meteor.isServer) {
 - Use `.au.js` for every javascript file that Aurelia will handle. (with `meteor-typescript` can use `.ts`)
 - Use `.au.html` or `.jade` for every Aurelia Templates.
 
-You can mix these things as your wish.
+You can mix these things if your wish.
 
 
 ### Copyright and license

@@ -32,7 +32,8 @@ class CompilerES extends CachingCompiler {
             sourceMaps: true,
             optional: [
                 "es7.classProperties",
-                "es7.decorators"
+                "es7.decorators",
+                "optimisation.modules.system"
             ]
         });
 
@@ -49,7 +50,8 @@ class CompilerES extends CachingCompiler {
             path: compileResult.path,
             sourcePath: inputFile.getPathInPackage(),
             data: compileResult.code,
-            sourceMap: compileResult.map
+            sourceMap: compileResult.map,
+            bare: true
         });
     }
 }
