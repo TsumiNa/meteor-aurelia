@@ -1,6 +1,6 @@
 Package.describe({
     name: 'tsumina:meteor-aurelia',
-    version: '0.6.1',
+    version: '0.6.2',
     summary: 'Combines the power of Aurelia with magical Meteor. Use Jade to speed up your works',
     git: 'http://github.com/tsumina/meteor-aurelia',
     documentation: 'README.md'
@@ -9,7 +9,7 @@ Package.describe({
 Package.onUse(function(api) {
     api.versionsFrom('1.2.0.2');
     api.use('isobuild:compiler-plugin@1.0.0');
-    api.use('tsumina:meteor-systemjs@0.0.3');
+    api.use('tsumina:meteor-systemjs@0.2.0');
     api.addFiles([
         "lib/config.js",
         "lib/aurelia.js"
@@ -20,7 +20,7 @@ Package.onUse(function(api) {
 Package.registerBuildPlugin({
     name: 'es',
     use: [
-        'ecmascript@0.1.5',
+        'ecmascript@0.1.6',
         'caching-compiler@1.0.0'
     ],
     sources: [
@@ -36,7 +36,7 @@ Package.registerBuildPlugin({
 Package.registerBuildPlugin({
     name: 'au_html',
     use: [
-        'ecmascript@0.1.5',
+        'ecmascript@0.1.6',
         'caching-compiler@1.0.0'
     ],
     sources: [
@@ -50,7 +50,7 @@ Package.registerBuildPlugin({
 Package.registerBuildPlugin({
     name: 'au_jade',
     use: [
-        'ecmascript@0.1.5',
+        'ecmascript@0.1.6',
         'caching-compiler@1.0.0'
     ],
     sources: [

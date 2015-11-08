@@ -5,7 +5,9 @@
 [Aurelia](http://aurelia.io) and [Meteor](http://www.meteor.com) power combined.Use Jade and html-minify to speed up your works.
 
 **This package adds SystemJS Module Loader to your project.** It bundle with [meteor-systemjs](https://github.com/TsumiNa/meteor-systemjs) as default.
-If you want use typescript, you can add [meteor-typescript](https://github.com/TsumiNa/meteor-typescript) package to you meteor app project.
+If you want use typescript, you can add [meteor-typescript](https://github.com/TsumiNa/meteor-typescript) package to you meteor app project. You can get corresponding definition files of Aurelia on [here](https://github.com/TsumiNa/aurelia-powers-combined/tree/master/aurelia-dts)
+
+[Here](https://github.com/TsumiNa/aurelia-skeleton-jade/tree/typescript-jade) is an example to show how to play with typescript and aurelia
 
 - [Change Log](#change-log)
 - [Quick start](#quick-start)
