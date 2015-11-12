@@ -18,6 +18,10 @@ If you want use typescript, you can add [meteor-typescript](https://github.com/T
 
 ## change log
 
+#### 0.7.0
+- Update to Aurelia-bootstrapper@0.19.0
+- Update to html-minifier@1.0.0
+
 #### 0.6.1
 - Update Aurelia components
 - Use bare mode. Now compiled file is not in its own closure
