@@ -1,11 +1,12 @@
 var minify = Npm.require('html-minifier').minify;
+// const debug = Npm.require('debug')('ts:debug:');
 
 Plugin.registerCompiler({
-  extensions: ['html', 'au.html'],
-  archMatching: 'web',
-  filenames: []
-}, () =>{
-  return new CompilerHTML();
+    extensions: ['html', 'au.html'],
+    archMatching: 'web',
+    filenames: []
+}, () => {
+    return new CompilerHTML();
 });
 
 class CompilerHTML extends CachingCompiler {
@@ -26,12 +27,24 @@ class CompilerHTML extends CachingCompiler {
 
     compileOneFile(inputFile) {
         let fileName = inputFile.getPathInPackage();
-        if (fileName === 'index.html') { return; }
+        if (fileName === 'index.html') {
+            return;
+        }
         let moduleName = fileName.replace(/(\.au)?\.html$/, '').replace(/\\/g, '/');
         let ret = {};
-        ret.code = this.buildTemplate(inputFile.getContentsAsString(), moduleName);
-        ret.path = moduleName + '.tpl.js';
-        return ret;
+        try {
+            // Just parse the html to make sure it is correct before minifying
+            let src = inputFile.getContentsAsString()
+            HTMLTools.parseFragment(src)
+            ret.code = this.buildTemplate(src, moduleName);
+            ret.path = moduleName + '.tpl.js';
+            return ret;
+        } catch (err) {
+            return inputFile.error({
+                message: "HTML syntax error: " + err.message,
+                sourcePath: inputFile.getPathInPackage()
+            });
+        }
     }
 
     addCompileResult(inputFile, compileResult) {
@@ -44,7 +57,7 @@ class CompilerHTML extends CachingCompiler {
     }
 
     buildTemplate(src, moduleName) {
-
+        // debug('HTML File: %j', moduleName);
         return 'System.registerDynamic("' + moduleName + '.html!github:systemjs/plugin-text@0.0.2", [], true, function(require, exports, module) {' +
             '         var global = this, ' +
             '            __define = global.define; ' +

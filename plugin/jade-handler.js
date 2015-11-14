@@ -1,11 +1,12 @@
 var jade = Npm.require('jade');
+// const debug = Npm.require('debug')('ts:debug:');
 
 Plugin.registerCompiler({
-  extensions: ['jade'],
-  archMatching: 'web',
-  filenames: []
-}, () =>{
-  return new CompilerJADE();
+    extensions: ['jade'],
+    archMatching: 'web',
+    filenames: []
+}, () => {
+    return new CompilerJADE();
 });
 
 class CompilerJADE extends CachingCompiler {
@@ -42,6 +43,7 @@ class CompilerJADE extends CachingCompiler {
     }
 
     renderJade(file) {
+        // debug('Jade File: %j', inputFile.getPathInPackage());
         try {
             return jade.render(file.getContentsAsString());
         } catch (err) {

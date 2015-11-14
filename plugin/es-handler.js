@@ -1,4 +1,5 @@
 var babel = Npm.require('babel-core');
+// const debug = Npm.require('debug')('ts:debug:');
 
 Plugin.registerCompiler({
     extensions: ['au.js'],
@@ -27,15 +28,23 @@ class CompilerES extends CachingCompiler {
     }
 
     compileOneFile(inputFile) {
-        let result = babel.transform(inputFile.getContentsAsString(), {
-            modules: "system",
-            sourceMaps: true,
-            optional: [
-                "es7.classProperties",
-                "es7.decorators",
-                "optimisation.modules.system"
-            ]
-        });
+        // debug('Javascript File: %j', inputFile.getPathInPackage());
+        try {
+            var result = babel.transform(inputFile.getContentsAsString(), {
+                modules: "system",
+                sourceMaps: true,
+                optional: [
+                    "es7.classProperties",
+                    "es7.decorators",
+                    "optimisation.modules.system"
+                ]
+            });
+        } catch (err) {
+            return inputFile.error({
+                message: "Javascript syntax error: " + err.message,
+                sourcePath: inputFile.getPathInPackage()
+            });
+        }
 
         let moduleName = inputFile.getPathInPackage().replace(/\.au\.js$/, '').replace(/\\/g, '/');
         let ret = {};

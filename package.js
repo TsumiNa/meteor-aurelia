@@ -1,6 +1,6 @@
 Package.describe({
     name: 'tsumina:meteor-aurelia',
-    version: '0.8.0',
+    version: '0.8.1',
     summary: 'Combines the power of Aurelia with magical Meteor. Use Jade to speed up your works',
     git: 'http://github.com/tsumina/meteor-aurelia',
     documentation: 'README.md'
@@ -52,7 +52,8 @@ Package.registerBuildPlugin({
     name: 'html_compiler',
     use: [
         'ecmascript@0.1.6',
-        'caching-compiler@1.0.0'
+        'caching-compiler@1.0.0',
+        'html-tools@1.0.5'
     ],
     sources: [
         'plugin/html-handler.js'

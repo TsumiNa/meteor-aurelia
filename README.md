@@ -18,6 +18,10 @@ If you want use typescript, you can add [meteor-typescript](https://github.com/T
 
 ## change log
 
+#### 0.8.1
+- Add HTML syntax error check
+- Some bug fix
+
 #### 0.8.0
 - **[*breaking change*]:**
 
