@@ -18,6 +18,13 @@ If you want use typescript, you can add [meteor-typescript](https://github.com/T
 
 ## change log
 
+#### 0.8.0
+- **[*breaking change*]:**
+
+  - You **must remove `blaze-html-templates` and `spacebars` packages** because this package will take control of the `html` files. Just `meteor remove blaze-html-templates spacebars`
+  - Now template files can use `*.html` extension, `*.au.html` is also available for incompatibility.
+  - The `index.html` under the root is the only one will be compiled to normal html template. You can't write your body codes here such as `<div aurelia-app="client/app/main"></div>`
+
 #### 0.7.0
 - Update to Aurelia-bootstrapper@0.19.0
 - Update to html-minifier@1.0.0
@@ -79,11 +86,11 @@ export function configure(aurelia) {
 
 The `main.au.js` is the file where the configuration is done to bootstrap Aurelia.
 
-In this case the main file tells where the entry point of the app is located ('client/app'), which means go look for the `app.au.html`, `app.au.js` pair.
+In this case the main file tells where the entry point of the app is located ('client/app'), which means go look for the `app.html`, `app.au.js` pair.
 
 By convention Aurelia uses view/view-model pairs of the same name.
 
-In the client folder, create app.au.html and insert:
+In the client folder, create app.html and insert:
 
 ```html
 <template>
@@ -131,7 +138,7 @@ if (Meteor.isServer) {
 ## Conventions
 
 - Use `.au.js` for every javascript file that Aurelia will handle. (with `meteor-typescript` can use `.ts`)
-- Use `.au.html` or `.jade` for every Aurelia Templates.
+- Use `.au.html`, `.html` or `.jade` for every Aurelia Templates.
 
 You can mix these things if your wish.
 

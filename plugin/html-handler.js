@@ -1,7 +1,8 @@
 var minify = Npm.require('html-minifier').minify;
 
 Plugin.registerCompiler({
-  extensions: ['au.html'],
+  extensions: ['html', 'au.html'],
+  archMatching: 'web',
   filenames: []
 }, () =>{
   return new CompilerHTML();
@@ -24,7 +25,9 @@ class CompilerHTML extends CachingCompiler {
     }
 
     compileOneFile(inputFile) {
-        let moduleName = inputFile.getPathInPackage().replace(/\.au\.html$/, '').replace(/\\/g, '/');
+        let fileName = inputFile.getPathInPackage();
+        if (fileName === 'index.html') { return; }
+        let moduleName = fileName.replace(/(\.au)?\.html$/, '').replace(/\\/g, '/');
         let ret = {};
         ret.code = this.buildTemplate(inputFile.getContentsAsString(), moduleName);
         ret.path = moduleName + '.tpl.js';

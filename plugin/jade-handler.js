@@ -2,6 +2,7 @@ var jade = Npm.require('jade');
 
 Plugin.registerCompiler({
   extensions: ['jade'],
+  archMatching: 'web',
   filenames: []
 }, () =>{
   return new CompilerJADE();
