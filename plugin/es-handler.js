@@ -8,6 +8,20 @@ Plugin.registerCompiler({
     return new CompilerES();
 });
 
+function prepareSourceMap(sourceMapContent, fileContent, sourceMapPath, packageName) {
+    let sourceMapJson = sourceMapContent;
+    sourceMapJson.sourcesContent = [fileContent];
+
+    // if source in a package
+    if (packageName) {
+        sourceMapJson.sources = ['packages/' + sourceMapPath];
+    } else {
+        sourceMapJson.sources = [sourceMapPath];
+    }
+    return sourceMapJson;
+}
+
+
 class CompilerES extends CachingCompiler {
     constructor() {
         super({
@@ -28,9 +42,12 @@ class CompilerES extends CachingCompiler {
     }
 
     compileOneFile(inputFile) {
+        let fileName = inputFile.getPathInPackage();
+        let fileContent = inputFile.getContentsAsString();
+        let packageName = inputFile.getPackageName();
         // debug('Javascript File: %j', inputFile.getPathInPackage());
         try {
-            var result = babel.transform(inputFile.getContentsAsString(), {
+            var result = babel.transform(fileContent, {
                 modules: "system",
                 sourceMaps: true,
                 optional: [
@@ -42,15 +59,29 @@ class CompilerES extends CachingCompiler {
         } catch (err) {
             return inputFile.error({
                 message: "Javascript syntax error: " + err.message,
-                sourcePath: inputFile.getPathInPackage()
+                sourcePath: fileName
             });
         }
 
-        let moduleName = inputFile.getPathInPackage().replace(/\.au\.js$/, '').replace(/\\/g, '/');
+        // result
         let ret = {};
-        ret.code = result.code.replace("System.register([", 'System.register("' + moduleName + '",[');
+
+        // get transpiled code
+        let moduleName = fileName.replace(/\.au\.js$/, '').replace(/\\/g, '/');
+        let code = result.code.replace("System.register([", 'System.register("' + moduleName + '",[');
+        code = code.slice(0, code.lastIndexOf("//#"));
+
+        // get source map
+        let map = prepareSourceMap(
+            result.map,
+            fileContent,
+            fileName,
+            packageName);
+
+        // push to result
+        ret.code = code;
         ret.path = moduleName + '.js';
-        ret.map = result.map;
+        ret.map = map;
         return ret;
     }
 

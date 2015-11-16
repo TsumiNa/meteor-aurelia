@@ -4,6 +4,7 @@ var minify = Npm.require('html-minifier').minify;
 Plugin.registerCompiler({
     extensions: ['html', 'au.html'],
     archMatching: 'web',
+    isTemplate: true,
     filenames: []
 }, () => {
     return new CompilerHTML();

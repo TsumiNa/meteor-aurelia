@@ -8,7 +8,10 @@
 
 If you want use typescript, you can add [meteor-typescript](https://github.com/TsumiNa/meteor-typescript) package to you meteor app project. You can get corresponding definition files of Aurelia on [here](https://github.com/TsumiNa/aurelia-powers-combined/tree/master/aurelia-dts)
 
-[Here](https://github.com/TsumiNa/aurelia-skeleton-jade/tree/typescript-jade) is an example to show how to play with typescript and aurelia
+[Aurelia-TODO-App](https://github.com/TsumiNa/Aurelia-TODO-App) is an simple example to show how to play with typescript and aurelia.
+
+[aurelia-meteor-todos](https://github.com/Markusxmr/aurelia-meteor-todos) is another one port from advanced meteor todos app by [Markusxmr](https://github.com/Markusxmr). Here to see the [live demo](http://aurelia-todos.meteor.com/)
+
 
 - [Change Log](#change-log)
 - [Quick start](#quick-start)
@@ -18,8 +21,12 @@ If you want use typescript, you can add [meteor-typescript](https://github.com/T
 
 ## change log
 
+#### 0.8.2
+- Improve sourecMap support.
+- Fixed some bugs. 
+
 #### 0.8.1
-- Add HTML syntax error check
+- Add HTML/Jade syntax error check
 - Some bug fix
 
 #### 0.8.0
@@ -28,14 +35,6 @@ If you want use typescript, you can add [meteor-typescript](https://github.com/T
   - You **must remove `blaze-html-templates` and `spacebars` packages** because this package will take control of the `html` files. Just `meteor remove blaze-html-templates spacebars`
   - Now template files can use `*.html` extension, `*.au.html` is also available for incompatibility.
   - The `index.html` under the root is the only one will be compiled to normal html template. You can't write your body codes here such as `<div aurelia-app="client/app/main"></div>`
-
-#### 0.7.0
-- Update to Aurelia-bootstrapper@0.19.0
-- Update to html-minifier@1.0.0
-
-#### 0.6.1
-- Update Aurelia components
-- Use bare mode. Now compiled file is not in its own closure
 
 #### 0.5.0
 - **[*breaking change*]** Typescript is unbundled. As a result, you will never see typescript messages. **There should no changes for use.**
