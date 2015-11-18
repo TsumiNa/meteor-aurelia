@@ -6,20 +6,33 @@
 
 **This package adds SystemJS Module Loader to your project.** It bundle with [meteor-systemjs](https://github.com/TsumiNa/meteor-systemjs) as default.
 
-If you want use typescript, you can add [meteor-typescript](https://github.com/TsumiNa/meteor-typescript) package to you meteor app project. You can get corresponding definition files of Aurelia on [here](https://github.com/TsumiNa/aurelia-powers-combined/tree/master/aurelia-dts)
+**You must remove `blaze-html-templates` and `spacebars` packages** because this package will handle `*.html` files. Just use:
+```bash
+$ meteor remove blaze-html-templates spacebars
+```
 
-[Aurelia-TODO-App](https://github.com/TsumiNa/Aurelia-TODO-App) is an simple example to show how to play with typescript and aurelia.
-
-[aurelia-meteor-todos](https://github.com/Markusxmr/aurelia-meteor-todos) is another one port from advanced meteor todos app by [Markusxmr](https://github.com/Markusxmr). Here to see the [live demo](http://aurelia-todos.meteor.com/)
-
-
+## Index
+- [Conventions](#conventions)
 - [Change Log](#change-log)
 - [Quick start](#quick-start)
 - [Example](#example)
 - [Tutorial](#tutorial)
-- [Conventions](#conventions)
+
+## Conventions
+
+- Use `.au.js` for every javascript file that Aurelia will handle. (with `meteor-typescript` can use `.ts`)
+- Use `.au.html`, `.html` or `.jade` for every Aurelia Templates.
+
+You can mix these things if your wish.
+
+
+If you want use typescript, you can add [meteor-typescript](https://github.com/TsumiNa/meteor-typescript) package to you meteor app project. Get corresponding definition files of Aurelia [here](https://github.com/TsumiNa/aurelia-powers-combined/tree/master/aurelia-dts)
+
 
 ## change log
+
+#### 0.9.0
+- Update to Aurelia@1.0.0-beta.1
 
 #### 0.8.2
 - Improve sourecMap support.
@@ -36,11 +49,6 @@ If you want use typescript, you can add [meteor-typescript](https://github.com/T
   - Now template files can use `*.html` extension, `*.au.html` is also available for incompatibility.
   - The `index.html` under the root is the only one will be compiled to normal html template. You can't write your body codes here such as `<div aurelia-app="client/app/main"></div>`
 
-#### 0.5.0
-- **[*breaking change*]** Typescript is unbundled. As a result, you will never see typescript messages. **There should no changes for use.**
-- Incremental build support
-- Parallel build support.
-- Update aurelia-bootstrapper to 0.18.0. See [details](https://github.com/aurelia/bootstrapper/releases/tag/0.18.0) for this change
 
 ## Quick start
 
@@ -48,6 +56,7 @@ If you want use typescript, you can add [meteor-typescript](https://github.com/T
 2. Create a new meteor app using `$ meteor create myapp` or navigate to the root of your existing app
 3. Install Aurelia and  meteor-typescript:
 ```bash
+$ meteor remove blaze-html-templates spacebars
 $ meteor add tsumina:meteor-aurelia
 $ meteor add tsumina:meteor-typescript  # if you need typescript support
 ```
@@ -55,6 +64,11 @@ $ meteor add tsumina:meteor-typescript  # if you need typescript support
 
 ## Example
 - [Example application](https://github.com/tsumina/aurelia-skeleton-jade) : A **meteor-aurelia** port of [skeleton-navigation](http://github.com/aurelia/skeleton-navigation)
+
+- [Aurelia-TODO-App](https://github.com/TsumiNa/Aurelia-TODO-App) is an simple example to show how to play with typescript and aurelia.
+
+- [aurelia-meteor-todos](https://github.com/Markusxmr/aurelia-meteor-todos) is another one port from advanced meteor todos app by [Markusxmr](https://github.com/Markusxmr). Here to see the [live demo](http://aurelia-todos.meteor.com/)
+
 
 ## Tutorial
 
@@ -137,13 +151,6 @@ if (Meteor.isServer) {
 }
 ```
 ![c/s](https://lh4.googleusercontent.com/-AuGDIhZ7UOA/VhfBSJpGHJI/AAAAAAAAc50/y63NWDadYac/w923-h921-no/%25E5%25B1%258F%25E5%25B9%2595%25E5%25BF%25AB%25E7%2585%25A7%2B2015-10-09%2B%25E4%25B8%258B%25E5%258D%258810.27.25.png)
-
-## Conventions
-
-- Use `.au.js` for every javascript file that Aurelia will handle. (with `meteor-typescript` can use `.ts`)
-- Use `.au.html`, `.html` or `.jade` for every Aurelia Templates.
-
-You can mix these things if your wish.
 
 
 ### Copyright and license
