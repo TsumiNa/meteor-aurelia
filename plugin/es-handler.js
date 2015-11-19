@@ -11,7 +11,7 @@ Plugin.registerCompiler({
 function prepareSourceMap(sourceMapContent, fileContent, sourceMapPath, packageName) {
     let sourceMapJson = sourceMapContent;
     sourceMapJson.sourcesContent = [fileContent];
-
+    
     // if source in a package
     if (packageName) {
         sourceMapJson.sources = ['packages/' + sourceMapPath];

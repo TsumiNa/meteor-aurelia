@@ -59,7 +59,7 @@ class CompilerHTML extends CachingCompiler {
 
     buildTemplate(src, moduleName) {
         // debug('HTML File: %j', moduleName);
-        return 'System.registerDynamic("' + moduleName + '.html!github:systemjs/plugin-text@0.0.2", [], true, function(require, exports, module) {' +
+        return 'System.registerDynamic("' + moduleName + '.html!github:systemjs/plugin-text@0.0.3", [], true, function(require, exports, module) {' +
             '         var global = this, ' +
             '            __define = global.define; ' +
             '         global.define = undefined; ' +
