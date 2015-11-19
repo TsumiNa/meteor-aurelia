@@ -27,11 +27,13 @@ class CompilerJADE extends CachingCompiler {
     }
 
     compileOneFile(inputFile) {
+        let packageName = inputFile.getPackageName();
         let moduleName = inputFile.getPathInPackage().replace(/\\/g, '/').replace('.jade', '');
-        let ret = {};
-        ret.code = this.buildTemplate(this.renderJade(inputFile), moduleName);
-        ret.path = moduleName + '.tpl.js';
-        return ret;
+        moduleName = packageName ? packageName.slice(packageName.indexOf(":") + 1) + '/' + moduleName : moduleName;
+        return {
+            code: this.buildTemplate(this.renderJade(inputFile), moduleName),
+            path: moduleName + '.tpl.js'
+        };
     }
 
     addCompileResult(inputFile, compileResult) {

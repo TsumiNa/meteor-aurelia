@@ -28,24 +28,26 @@ class CompilerHTML extends CachingCompiler {
 
     compileOneFile(inputFile) {
         let fileName = inputFile.getPathInPackage();
+        let packageName = inputFile.getPackageName();
         if (fileName === 'index.html') {
             return;
         }
         let moduleName = fileName.replace(/(\.au)?\.html$/, '').replace(/\\/g, '/');
-        let ret = {};
+        moduleName = packageName ? packageName.slice(packageName.indexOf(":") + 1) + '/' + moduleName : moduleName;
+        let src = inputFile.getContentsAsString()
+        // Just parse the html to make sure it is correct before minifying
         try {
-            // Just parse the html to make sure it is correct before minifying
-            let src = inputFile.getContentsAsString()
             HTMLTools.parseFragment(src)
-            ret.code = this.buildTemplate(src, moduleName);
-            ret.path = moduleName + '.tpl.js';
-            return ret;
         } catch (err) {
             return inputFile.error({
                 message: "HTML syntax error: " + err.message,
                 sourcePath: inputFile.getPathInPackage()
             });
         }
+        return {
+            code: this.buildTemplate(src, moduleName),
+            path: moduleName + '.tpl.js'
+        };
     }
 
     addCompileResult(inputFile, compileResult) {

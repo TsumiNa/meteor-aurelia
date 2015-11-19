@@ -8,16 +8,10 @@ Plugin.registerCompiler({
     return new CompilerES();
 });
 
-function prepareSourceMap(sourceMapContent, fileContent, sourceMapPath, packageName) {
+function prepareSourceMap(sourceMapContent, fileContent, sourceMapPath) {
     let sourceMapJson = sourceMapContent;
     sourceMapJson.sourcesContent = [fileContent];
-    
-    // if source in a package
-    if (packageName) {
-        sourceMapJson.sources = ['packages/' + sourceMapPath];
-    } else {
-        sourceMapJson.sources = [sourceMapPath];
-    }
+    sourceMapJson.sources = [sourceMapPath];
     return sourceMapJson;
 }
 
@@ -45,6 +39,8 @@ class CompilerES extends CachingCompiler {
         let fileName = inputFile.getPathInPackage();
         let fileContent = inputFile.getContentsAsString();
         let packageName = inputFile.getPackageName();
+        let sourceMapPath = inputFile.getDisplayPath();
+
         // debug('Javascript File: %j', inputFile.getPathInPackage());
         try {
             var result = babel.transform(fileContent, {
@@ -63,11 +59,9 @@ class CompilerES extends CachingCompiler {
             });
         }
 
-        // result
-        let ret = {};
-
         // get transpiled code
         let moduleName = fileName.replace(/\.au\.js$/, '').replace(/\\/g, '/');
+        moduleName = packageName ? packageName.slice(packageName.indexOf(":") + 1) + '/' + moduleName : moduleName;
         let code = result.code.replace("System.register([", 'System.register("' + moduleName + '",[');
         code = code.slice(0, code.lastIndexOf("//#"));
 
@@ -75,14 +69,14 @@ class CompilerES extends CachingCompiler {
         let map = prepareSourceMap(
             result.map,
             fileContent,
-            fileName,
-            packageName);
+            sourceMapPath);
 
         // push to result
-        ret.code = code;
-        ret.path = moduleName + '.js';
-        ret.map = map;
-        return ret;
+        return {
+            code: code,
+            path: moduleName + '.js',
+            map: map
+        };
     }
 
     addCompileResult(inputFile, compileResult) {
