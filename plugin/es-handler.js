@@ -61,7 +61,7 @@ class CompilerES extends CachingCompiler {
 
         // get transpiled code
         let moduleName = fileName.replace(/\.au\.js$/, '').replace(/\\/g, '/');
-        moduleName = packageName ? packageName.slice(packageName.indexOf(":") + 1) + '/' + moduleName : moduleName;
+        moduleName = packageName ? packageName + '/' + moduleName : moduleName;
         let code = result.code.replace("System.register([", 'System.register("' + moduleName + '",[');
         code = code.slice(0, code.lastIndexOf("//#"));
 

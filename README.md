@@ -31,7 +31,7 @@ If you want use typescript, you can add [meteor-typescript](https://github.com/T
 
 ## change log
 
-#### 0.9.0
+#### 0.9.1
 - Update to Aurelia@1.0.0-beta.1
 
 #### 0.8.2

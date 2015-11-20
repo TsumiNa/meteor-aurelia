@@ -27,12 +27,13 @@ class CompilerJADE extends CachingCompiler {
     }
 
     compileOneFile(inputFile) {
+        let fileName = inputFile.getPathInPackage();
         let packageName = inputFile.getPackageName();
-        let moduleName = inputFile.getPathInPackage().replace(/\\/g, '/').replace('.jade', '');
+        let moduleName = fileName.replace(/\\/g, '/').replace('.jade', '');
         moduleName = packageName ? packageName.slice(packageName.indexOf(":") + 1) + '/' + moduleName : moduleName;
         return {
             code: this.buildTemplate(this.renderJade(inputFile), moduleName),
-            path: moduleName + '.tpl.js'
+            path: fileName + '.tpl.js'
         };
     }
 
@@ -60,13 +61,13 @@ class CompilerJADE extends CachingCompiler {
     buildTemplate(src, moduleName) {
 
         return 'System.registerDynamic("' + moduleName + '.html!github:systemjs/plugin-text@0.0.3", [], true, function(require, exports, module) {' +
-            '         var global = this, ' +
-            '            __define = global.define; ' +
-            '         global.define = undefined; ' +
-            '         module.exports = "' + this.clean(src) +
-            '         global.define = __define;' +
-            '         return module.exports;' +
-            '       });'
+            'var global = this,' +
+            '__define = global.define;' +
+            'global.define = undefined;' +
+            'module.exports = "' + this.clean(src) + '";' +
+            'global.define = __define;' +
+            'return module.exports;' +
+            '});'
     }
 
     clean(src) {
@@ -78,6 +79,6 @@ class CompilerJADE extends CachingCompiler {
             .replace(/[\t]/g, "\\t")
             .replace(/[\r]/g, "\\r")
             .replace(/[\u2028]/g, "\\u2028")
-            .replace(/[\u2029]/g, "\\u2029") + '";';
+            .replace(/[\u2029]/g, "\\u2029");
     }
 }

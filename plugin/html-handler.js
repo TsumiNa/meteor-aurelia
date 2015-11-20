@@ -33,7 +33,7 @@ class CompilerHTML extends CachingCompiler {
             return;
         }
         let moduleName = fileName.replace(/(\.au)?\.html$/, '').replace(/\\/g, '/');
-        moduleName = packageName ? packageName.slice(packageName.indexOf(":") + 1) + '/' + moduleName : moduleName;
+        moduleName = packageName ? packageName + '/' + moduleName : moduleName;
         let src = inputFile.getContentsAsString()
         // Just parse the html to make sure it is correct before minifying
         try {
@@ -46,7 +46,7 @@ class CompilerHTML extends CachingCompiler {
         }
         return {
             code: this.buildTemplate(src, moduleName),
-            path: moduleName + '.tpl.js'
+            path: fileName + '.tpl.js'
         };
     }
 
@@ -62,13 +62,13 @@ class CompilerHTML extends CachingCompiler {
     buildTemplate(src, moduleName) {
         // debug('HTML File: %j', moduleName);
         return 'System.registerDynamic("' + moduleName + '.html!github:systemjs/plugin-text@0.0.3", [], true, function(require, exports, module) {' +
-            '         var global = this, ' +
-            '            __define = global.define; ' +
-            '         global.define = undefined; ' +
-            '         module.exports = "' + this.clean(src) + '";' +
-            '         global.define = __define;' +
-            '         return module.exports;' +
-            '       });'
+            'var global = this,' +
+            '__define = global.define;' +
+            'global.define = undefined;' +
+            'module.exports = "' + this.clean(src) + '";' +
+            'global.define = __define;' +
+            'return module.exports;' +
+            '});'
     }
 
     clean(src) {
