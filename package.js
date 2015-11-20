@@ -1,6 +1,6 @@
 Package.describe({
     name: 'tsumina:meteor-aurelia',
-    version: '0.9.1',
+    version: '0.9.2',
     summary: 'Combines the power of Aurelia with magical Meteor. Use Jade to speed up your works',
     git: 'http://github.com/tsumina/meteor-aurelia',
     documentation: 'README.md'
@@ -10,10 +10,11 @@ Package.onUse(function(api) {
     api.versionsFrom('1.2.0.2');
     api.use('isobuild:compiler-plugin@1.0.0');
     api.use('tsumina:meteor-systemjs@0.2.0');
+    api.imply('tsumina:meteor-systemjs@0.2.0');
     api.addFiles([
         "lib/config.js",
         "lib/aurelia.js"
-    ], ["client"]);
+    ], ["client"], {bare: true});
 });
 
 
@@ -30,22 +31,6 @@ Package.registerBuildPlugin({
         'plugin/index-handle/html-scanner.js',
         'plugin/index-handle/index-handle.js'
     ]
-});
-
-Package.registerBuildPlugin({
-    name: 'sysjs_compiler',
-    use: [
-        'ecmascript@0.1.6',
-        'caching-compiler@1.0.0'
-    ],
-    sources: [
-        'lib/utils.js',
-        'plugin/es-handler.js'
-    ],
-    npmDependencies: {
-        'chalk': '1.1.1',
-        'babel-core': '5.8.24'
-    }
 });
 
 Package.registerBuildPlugin({

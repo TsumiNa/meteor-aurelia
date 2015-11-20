@@ -20,8 +20,10 @@ $ meteor remove blaze-html-templates spacebars
 
 ## Conventions
 
-- Use `.au.js` for every javascript file that Aurelia will handle. (with `meteor-typescript` can use `.ts`)
+- Use `.sys.js` for every javascript file that Aurelia will handle. with `meteor-typescript` can use `.ts`
 - Use `.au.html`, `.html` or `.jade` for every Aurelia Templates.
+
+> use `.au.js` for compatible
 
 You can mix these things if your wish.
 
@@ -85,9 +87,9 @@ Aurelia use conventions to keep code simple and clean, to bootstrap a aurelia ap
 </body>
 ```
 
-The `aurelia-app="client/main"` attribute points to the Aurelia configuration file named main, which is `main.au.js`.
+The `aurelia-app="client/main"` attribute points to the Aurelia configuration file named main, which is `main.sys.js`.
   
-Assume you use es6 js and html template. In the client folder create main.au.js and insert:
+Assume you use es6 js and html template. In the client folder create main.sys.js and insert:
 
 
 ```javascript
@@ -101,9 +103,9 @@ export function configure(aurelia) {
 
 ```
 
-The `main.au.js` is the file where the configuration is done to bootstrap Aurelia.
+The `main.sys.js` is the file where the configuration is done to bootstrap Aurelia.
 
-In this case the main file tells where the entry point of the app is located ('client/app'), which means go look for the `app.html`, `app.au.js` pair.
+In this case the main file tells where the entry point of the app is located ('client/app'), which means go look for the `app.html`, `app.sys.js` pair.
 
 By convention Aurelia uses view/view-model pairs of the same name.
 
@@ -117,7 +119,7 @@ In the client folder, create app.html and insert:
 
 ```
 
-Then create app.au.js and insert:
+Then create app.sys.js and insert:
 
 ```javascript
 export class App {
