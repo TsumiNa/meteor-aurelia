@@ -17,6 +17,7 @@ $ meteor remove blaze-html-templates spacebars
 - [Quick start](#quick-start)
 - [Example](#example)
 - [Tutorial](#tutorial)
+- [Create Package](#create-package)
 
 ## Conventions
 
@@ -153,6 +154,80 @@ if (Meteor.isServer) {
 }
 ```
 ![c/s](https://lh4.googleusercontent.com/-AuGDIhZ7UOA/VhfBSJpGHJI/AAAAAAAAc50/y63NWDadYac/w923-h921-no/%25E5%25B1%258F%25E5%25B9%2595%25E5%25BF%25AB%25E7%2585%25A7%2B2015-10-09%2B%25E4%25B8%258B%25E5%258D%258810.27.25.png)
+
+## Create Package
+
+See the [example](https://github.com/TsumiNa/meteor-ui-virtualization) here.
+
+#### Details
+`meteor-aurelia` and `meteor-typescript` compile files with their package name as root path. If codes not in a package, package name is `null`, for example:
+**main.sys.js**
+```js
+export function configure(aurelia) {
+  aurelia.use
+    .standardConfiguration()
+    .developmentLogging()
+    .plugin('aurelia-animator-css')
+    .plugin('tsumina:ui-virtualization');
+
+  aurelia.start().then(a => a.setRoot('client/app'));
+}
+```
+to **main.js**
+```js
+System.register("client/main",[], function (_export) {
+  'use strict';  
+  _export('configure', configure);  
+  function configure(aurelia) {  
+    aurelia.use.standardConfiguration().developmentLogging().plugin('aurelia-animator-css').plugin('tsumina:ui-virtualization');
+    aurelia.start().then(function (a) {
+      return a.setRoot('client/app'); 
+    }); 
+  } 
+
+  return { 
+    setters: [], 
+    execute: function () {} 
+  }; 
+}) 
+```
+
+Now assume the **main.sys.js** in a package named **yourname:package-name**. In this case, the package name will be used as the root path. 
+ **main.js**
+```js
+System.register("yourname:package-name/client/main",[], function (_export) {
+  'use strict';  
+  _export('configure', configure);  
+  function configure(aurelia) {  
+    aurelia.use.standardConfiguration().developmentLogging().plugin('aurelia-animator-css').plugin('tsumina:ui-virtualization');
+    aurelia.start().then(function (a) {
+      return a.setRoot('client/app'); 
+    }); 
+  } 
+
+  return { 
+    setters: [], 
+    execute: function () {} 
+  }; 
+}) 
+```
+
+So if you create a aurelia package with a entry `index.sys.js` at your package root, Name your package **yourname:package-name**, and want other users load it like
+```js
+plugin('yourname:package-name');
+```
+you should add a `lib/init.js` file to you package sources with content:
+```js
+System.registerDynamic("yourname:package-name", ["yourname:package-name/index"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = $__require('yourname:package-name');
+  global.define = __define;
+  return module.exports;
+});
+```
 
 
 ### Copyright and license
