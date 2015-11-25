@@ -46,7 +46,7 @@ class CompilerHTML extends CachingCompiler {
         }
         return {
             code: this.buildTemplate(src, moduleName),
-            path: fileName + '.tpl.js'
+            path: fileName + '.js'
         };
     }
 

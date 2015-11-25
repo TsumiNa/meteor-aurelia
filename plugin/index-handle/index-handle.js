@@ -20,7 +20,7 @@ function compileTagsToStaticHtml(tags) {
 class StaticHtmlTagHandler {
     constructor() {
         this.results = {
-            head: '',
+            head: `<script> delete window.define </script>\n`,
             body: '',
             js: '',
             bodyAttrs: {}
