@@ -3,7 +3,7 @@ Plugin.registerCompiler({
     filenames: ['index.html'],
     archMatching: 'web',
     isTemplate: true
-}, () => new NgCachingHtmlCompiler("angular", scanHtmlForTags, compileTagsToStaticHtml));
+}, () => new NgCachingHtmlCompiler("IndexCompiler", scanHtmlForTags, compileTagsToStaticHtml));
 
 // Same API as TutorialTools.compileTagsWithSpacebars, but instead of compiling
 // with Spacebars, it just returns static HTML

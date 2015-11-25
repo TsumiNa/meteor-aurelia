@@ -1,6 +1,6 @@
 Package.describe({
     name: 'tsumina:meteor-aurelia',
-    version: '0.9.3',
+    version: '0.9.6',
     summary: 'Combines the power of Aurelia with magical Meteor. Use Jade to speed up your works',
     git: 'http://github.com/tsumina/meteor-aurelia',
     documentation: 'README.md'
@@ -29,7 +29,7 @@ Package.registerBuildPlugin({
     sources: [
         'plugin/index-handle/html-compiler.js',
         'plugin/index-handle/html-scanner.js',
-        'plugin/index-handle/index-handle.js'
+        'plugin/index-handle/index-compiler.js'
     ]
 });
 
@@ -41,7 +41,7 @@ Package.registerBuildPlugin({
         'html-tools@1.0.5'
     ],
     sources: [
-        'plugin/html-handler.js'
+        'plugin/html-compiler.js'
     ],
     npmDependencies: {
         'html-minifier': '1.0.0'
@@ -55,7 +55,7 @@ Package.registerBuildPlugin({
         'caching-compiler@1.0.0'
     ],
     sources: [
-        'plugin/jade-handler.js'
+        'plugin/jade-compiler.js'
     ],
     npmDependencies: {
         'jade': '1.11.0'

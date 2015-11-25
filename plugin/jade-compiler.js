@@ -7,13 +7,13 @@ Plugin.registerCompiler({
     isTemplate: true,
     filenames: []
 }, () => {
-    return new CompilerJADE();
+    return new JadeCompiler();
 });
 
-class CompilerJADE extends CachingCompiler {
+class JadeCompiler extends CachingCompiler {
     constructor() {
         super({
-            compilerName: 'CompilerHTML',
+            compilerName: 'JadeCompiler',
             defaultCacheSize: 1024 * 1024 * 10,
         });
     }

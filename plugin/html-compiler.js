@@ -7,13 +7,13 @@ Plugin.registerCompiler({
     isTemplate: true,
     filenames: []
 }, () => {
-    return new CompilerHTML();
+    return new HTMLCompiler();
 });
 
-class CompilerHTML extends CachingCompiler {
+class HTMLCompiler extends CachingCompiler {
     constructor() {
         super({
-            compilerName: 'CompilerHTML',
+            compilerName: 'HTMLCompiler',
             defaultCacheSize: 1024 * 1024 * 10,
         });
     }
