@@ -1,4 +1,5 @@
 var minify = Npm.require('html-minifier').minify;
+const crc = Npm.require('crc');
 // const debug = Npm.require('debug')('ts:debug:');
 
 Plugin.registerCompiler({
@@ -19,7 +20,7 @@ class HTMLCompiler extends CachingCompiler {
     }
 
     getCacheKey(inputFile) {
-        return inputFile.getSourceHash();
+        return inputFile.getSourceHash() + crc.crc32(inputFile.getPathInPackage()).toString(32);
     }
 
     compileResultSize(compileResult) {

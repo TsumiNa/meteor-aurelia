@@ -34,6 +34,9 @@ If you want use typescript, you can add [meteor-typescript](https://github.com/T
 
 ## change log
 
+#### 0.9.9
+- **Bug fix**, fix `Path reservation conflict` error when your have two or more files have exactly identical content.
+
 #### 0.9.1
 - Update to Aurelia@1.0.0-beta.1
 
