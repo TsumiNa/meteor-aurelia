@@ -1,6 +1,6 @@
 Package.describe({
     name: 'tsumina:meteor-aurelia',
-    version: '0.9.10',
+    version: '0.9.11',
     summary: 'Combines the power of Aurelia with magical Meteor. Use Jade to speed up your works',
     git: 'http://github.com/tsumina/meteor-aurelia',
     documentation: 'README.md'
@@ -9,8 +9,8 @@ Package.describe({
 Package.onUse(function(api) {
     api.versionsFrom('1.2.0.2');
     api.use('isobuild:compiler-plugin@1.0.0');
-    api.use('tsumina:meteor-systemjs@0.3.3');
-    api.imply('tsumina:meteor-systemjs@0.3.3');
+    api.use('tsumina:meteor-systemjs@0.3.7');
+    api.imply('tsumina:meteor-systemjs@0.3.7');
     api.addFiles([
         "lib/config.js",
         "lib/aurelia.js"
